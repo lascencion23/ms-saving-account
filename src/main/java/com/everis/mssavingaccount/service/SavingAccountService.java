@@ -20,9 +20,13 @@ public interface SavingAccountService {
 
     Mono<Long>  findCustomerAccountBank(String id);
 
+    Flux<SavingAccount> customerAccountBank(String id);
+    
     Mono<Customer>  findCustomer(String id);
 
     Flux<CreditCard> findCreditCardByCustomer(String t);
     
-    Mono<SavingAccount> findByCardNumber(String number);
+    Mono<SavingAccount> findByAccountNumber(String number);
+    
+    Mono<Long> creditExpiredById(String id);
 }
