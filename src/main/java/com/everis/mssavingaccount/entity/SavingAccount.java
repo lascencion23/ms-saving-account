@@ -24,7 +24,7 @@ public class SavingAccount {
     private Customer customer;
 
     @NotNull
-    private String cardNumber;
+    private String accountNumber;
 
     @NotNull
     private List<Person> holders;

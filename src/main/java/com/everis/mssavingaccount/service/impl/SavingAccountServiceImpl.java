@@ -57,9 +57,15 @@ public class SavingAccountServiceImpl implements SavingAccountService {
     
     // Plan B - CREDITCARD
   	public Flux<CreditCard> getDefaultCreditCard() {
-  		Flux<CreditCard> creditCard = Flux.just(new CreditCard("0", null, null,null,null,null));
+  		Flux<CreditCard> creditCard = Flux.just(new CreditCard("0", null, null,null,null,null,null));
   		return creditCard;
   	}
+  	
+	@Override
+	public Mono<Long> creditExpiredById(String id) {
+		return webClient.get().uri(this.uri + "/ms-credit-charge/creditCharge/creditExpiredById/{id}", id)
+				.accept(MediaType.APPLICATION_JSON).retrieve().bodyToMono(Long.class);
+	}
     
     
     @Override
@@ -98,8 +104,13 @@ public class SavingAccountServiceImpl implements SavingAccountService {
     }
     
     @Override
-    public Mono<SavingAccount> findByCardNumber(String number) {
-        return savingAccountRepository.findByCardNumber(number);
+    public Flux<SavingAccount> customerAccountBank(String id) {
+        return savingAccountRepository.findByCustomerId(id);
+    }
+    
+    @Override
+    public Mono<SavingAccount> findByAccountNumber(String number) {
+        return savingAccountRepository.findByAccountNumber(number);
     }
 
 }
