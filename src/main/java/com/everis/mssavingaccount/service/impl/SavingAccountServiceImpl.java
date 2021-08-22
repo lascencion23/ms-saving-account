@@ -70,6 +70,7 @@ public class SavingAccountServiceImpl implements SavingAccountService {
     
     @Override
     public Mono<SavingAccount> create(SavingAccount savingAccount) {
+        savingAccount.setAccountNumber(SavingAccount.generateAccountNumber());
         return savingAccountRepository.save(savingAccount);
     }
 

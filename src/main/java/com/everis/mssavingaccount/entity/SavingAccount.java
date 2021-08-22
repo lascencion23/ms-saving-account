@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Random;
 
 @Data
 @Builder
@@ -23,7 +24,6 @@ public class SavingAccount {
     @NotNull
     private Customer customer;
 
-    @NotNull
     private String accountNumber;
 
     @NotNull
@@ -47,6 +47,10 @@ public class SavingAccount {
 
     private LocalDateTime date;
 
-
+    public static String generateAccountNumber() {
+        final String ACCOUNT_PREFIX = "100-";
+        Random random = new Random();
+        return ACCOUNT_PREFIX + random.nextInt(999999999);
+    }
 
 }
